@@ -3,6 +3,24 @@
 This is a tiny library which exposes a javascript Map2 class. ES6 Map maps from
 k -> v. Map2 maps from (k1, k2) -> v.
 
+#### Why do you need this?
+
+```javascript
+var m = new Map;
+m.set([x, y], "dance");
+// ...
+m.get([x, y]); // undefined! The new list isn't in the map :(
+```
+
+With Map2:
+
+```javascript
+var m = new Map2;
+m.set(x, y, "dance");
+// ...
+m.get(x, y); // "dance" Woo!
+```
+
 The API is heavily based on the API for ES6 maps. Use `map.set(k1, k2, v)` to
 set values and `map.get(k1, k2)` to get them back again.
 
