@@ -64,7 +64,7 @@ Map2.prototype["delete"] = function(k1, k2) {
 Map2.prototype.forEach = function(fn) {
   this.map.forEach(function(inner, k1) {
     inner.forEach(function(v, k2) {
-      fn(k1, k2, v);
+      fn(v, k1, k2);
     });
   });
 };
