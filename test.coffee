@@ -33,6 +33,23 @@ describe 'map2', ->
     m.delete 1, 2
     assert.strictEqual m.size, 0
 
+  it 'returns the correct value when you call delete', ->
+    m = mapWithData()
+    assert.equal true, m.delete(1, 1)
+    assert.equal false, m.delete(1, 1)
+    assert.equal true, m.delete(1, 2)
+    assert.equal false, m.delete(1, 2)
+    assert.equal false, m.delete(10, 10)
+
+  it 'tells you if an item exists with has()', ->
+    m = mapWithData()
+    assert.equal true, m.has(1, 1)
+    m.delete 1, 1
+    assert.equal false, m.has(1, 1)
+    m.delete 1, 2
+    assert.equal false, m.has(1, 2)
+    assert.equal false, m.has(10, 10)
+
   it 'has size 0 after clear()', ->
     m = mapWithData()
     assert.strictEqual m.size, 6
