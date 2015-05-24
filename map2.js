@@ -5,10 +5,7 @@ module.exports = Map2;
 function Map2(data) {
   this.map = new Map;
   this.size = 0;
-  if (typeof data === 'function') {
-    this.makeDefault = data;
-  } else if (data) {
-    this.makeDefault = null;
+  if (data) {
     for (var i = 0; i < data.length; i++) {
       var ref = data[i], k1 = ref[0], k2 = ref[1], v = ref[2];
       this.set(k1, k2, v);
@@ -21,14 +18,6 @@ Map2.prototype.get = function(k1, k2) {
   if ((inner = this.map.get(k1))) {
     return inner.get(k2);
   }
-};
-
-Map2.prototype.getDef = function(k1, k2) {
-  var v = this.get(k1, k2);
-  if ((v === undefined) && this.makeDefault) {
-    this.set(k1, k2, v = this.makeDefault(k1, k2));
-  }
-  return v;
 };
 
 Map2.prototype.has = function(k1, k2) {
@@ -48,10 +37,10 @@ Map2.prototype.set = function(k1, k2, v) {
   return this;
 };
 
-Map2.prototype["delete"] = function(k1, k2) {
+Map2.prototype.delete = function(k1, k2) {
   var inner = this.map.get(k1);
   if (inner) {
-    var deleted = inner["delete"](k2);
+    var deleted = inner.delete(k2);
     if (deleted) {
       this.size--;
     }

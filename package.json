@@ -4,7 +4,7 @@
   "description": "Map from (k1,k2) -> v",
   "main": "map2.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha --compilers coffee:coffee-script/register --reporter spec test.coffee"
   },
   "repository": {
     "type": "git",
@@ -19,5 +19,9 @@
   "bugs": {
     "url": "https://github.com/josephg/map2/issues"
   },
-  "homepage": "https://github.com/josephg/map2"
+  "homepage": "https://github.com/josephg/map2",
+  "devDependencies": {
+    "coffee-script": "^1.9.2",
+    "mocha": "^2.2.5"
+  }
 }

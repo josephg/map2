@@ -37,6 +37,8 @@ m.forEach(function(v, k1, v2) {
     console.log(k1, k2, v); // Prints 1,2,3 then {x:5},['an','array'] 
 });
 
+m.delete(1, 2); // returns true if something was deleted.
+
 m.clear(); // Clears the map
 m.size; // 0.
 ```
