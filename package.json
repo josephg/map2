@@ -1,0 +1,23 @@
+{
+  "name": "map2",
+  "version": "0.1.0",
+  "description": "Map from (k1,k2) -> v",
+  "main": "map2.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "github.com/josephg/map2"
+  },
+  "keywords": [
+    "map",
+    "map2"
+  ],
+  "author": "Joseph Gentle <me@josephg.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/josephg/map2/issues"
+  },
+  "homepage": "https://github.com/josephg/map2"
+}
