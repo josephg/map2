@@ -135,7 +135,9 @@ Map2.prototype.clear = function() {
 
 // Helper for node / iojs so you can see the map in the repl.
 Map2.prototype.inspect = function(depth, options) {
-  var inspect = require('util').inspect;
+  // This is a dirty hack to confuse browserify so it won't pull in node's util
+  // library just to give us inspect.
+  var inspect = require('' + 'util').inspect;
   if (depth < 0) {
     return '[Map2]';
   }
