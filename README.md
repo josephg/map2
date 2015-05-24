@@ -11,7 +11,7 @@ It depends on the javascript Map class, so its avaliable in NodeJS 0.12, IoJS an
 % npm install map2
 ```
 
-... Then:
+## A quick tour:
 
 ```javascript
 var Map2 = require('map2');
@@ -31,15 +31,31 @@ m.size; // 2
 
 m.has(obj1, obj2); // true
 
-// The callback takes the value first - which is weird, but matches the
-// semantics of Map#forEach.
+// To iterate, either use .forEach():
 m.forEach(function(v, k1, v2) {
-    console.log(k1, k2, v); // Prints 1,2,3 then {x:5},['an','array'] 
+  // The callback takes the value first - which is weird, but matches the
+  // semantics of Map#forEach.
+  console.log(k1, k2, v); // Prints 1,2,3 then {x:5},['an','array'] 
 });
 
+// Or use the new es6 iterators.
+for (var entry of m) {
+  console.log(entry); // An array of [k1, k2, v]
+}
+
+for (var ks of m.keys()) {
+  console.log(ks); // An array of [k1, k2]
+}
+
+for (var v of m.values()) {
+  console.log(v); // A value.
+}
+
+// To delete things, you can either delete items individually:
 m.delete(1, 2); // returns true if something was deleted.
 
-m.clear(); // Clears the map
+// Or delete everything all at once:
+m.clear();
 m.size; // 0.
 ```
 

@@ -3,6 +3,15 @@ assert = require 'assert'
 
 Map2 = require './map2'
 
+mapWithData = ->
+  m = new Map2
+  m.set 1, 1, true
+  m.set 1, 2, false
+  m.set 2, 1, true
+  m.set 2, 2, false
+  m.set 3, 1, true
+  m.set 3, 2, false
+
 describe 'map2', ->
   it 'can store data', ->
     m = new Map2
@@ -25,25 +34,13 @@ describe 'map2', ->
     assert.strictEqual m.size, 0
 
   it 'has size 0 after clear()', ->
-    m = new Map2
-    m.set 1, 2, true
-    m.set 1, 3, true
-    m.set 2, 2, true
-    m.set 2, 3, true
-    m.set 3, 1, true
-    assert.strictEqual m.size, 5
+    m = mapWithData()
+    assert.strictEqual m.size, 6
     m.clear()
     assert.strictEqual m.size, 0
 
   it 'iterates through all items in forEach', ->
-    m = new Map2
-    m.set 1, 1, true
-    m.set 1, 2, false
-    m.set 2, 1, true
-    m.set 2, 2, false
-    m.set 3, 1, true
-    m.set 3, 2, false
-
+    m = mapWithData()
     num = 0
     m.forEach (v, k1, k2) ->
       assert k1 in [1,2,3]
@@ -54,6 +51,39 @@ describe 'map2', ->
 
     assert.equal num, 6
 
+  describe 'iterator', ->
+    it 'iterates through nothing if the map is empty', ->
+      m = new Map2
+      iter = m.entries()
+      assert iter.next().done
 
+    it 'iterates through all items', ->
+      m = mapWithData()
+      num = 0
+      iter = m[Symbol.iterator]()
+      assert.equal iter[Symbol.iterator](), iter
+      while !(vs = iter.next()).done
+        [k1, k2, v] = vs.value
+        assert k1 in [1,2,3]
+        assert k2 in [1,2]
+        assert.equal v, true if k2 is 1
+        assert.equal v, false if k2 is 2
+        num++
+      assert.equal num, 6
 
+    it 'iterates through values with .values()', ->
+      m = new Map2
+      m.set 1, 2, 3
+      m.set 1, 3, 5
+      m.set 2, 2, 3
 
+      iter = m.values()
+      assert.equal iter[Symbol.iterator](), iter
+
+      num = 0
+      while !(vs = iter.next()).done
+        assert vs.value in [3, 5]
+        num++
+
+      assert.equal num, 3
+      
