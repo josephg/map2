@@ -55,6 +55,13 @@ Map2.prototype.delete = function(k1, k2) {
   }
 };
 
+// Remove all items in the map.
+Map2.prototype.clear = function() {
+  this.map.clear();
+  this.size = 0;
+};
+
+
 // Iterates through all values in the set via the passed function. Note the
 // order of arguments - your function is called with (v, k1, k2). This is to
 // match the semantics of Map.forEach which passes (v, k).
@@ -124,13 +131,6 @@ Map2.prototype.values = function() {
       return {value:v.value[2], done:false};
     }
   });
-};
-
-
-// Remove all items in the map.
-Map2.prototype.clear = function() {
-  this.map.clear();
-  this.size = 0;
 };
 
 // Helper for node / iojs so you can see the map in the repl.
