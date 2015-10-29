@@ -73,65 +73,67 @@ Map2.prototype.forEach = function(fn) {
   });
 };
 
-function iterWithNext(next) {
-  var iter = {};
-  iter.next = next;
-  iter[Symbol.iterator] = function() { return iter; };
-  return iter;
+if (typeof Symbol !== 'undefined') {
+  function iterWithNext(next) {
+    var iter = {};
+    iter.next = next;
+    iter[Symbol.iterator] = function() { return iter; };
+    return iter;
+  }
+
+  // Iterator to support for..of loops
+  Map2.prototype[Symbol.iterator] = Map2.prototype.entries = function() {
+    var outer = this.map.entries();
+
+    var k1;
+    var inner = null;
+
+    return iterWithNext(function() {
+      var innerV;
+      while (inner == null || (innerV = inner.next()).done) {
+        // Go to the next outer map.
+        var outerV = outer.next();
+        // We need to return {done:true} - but this has the object we want.
+        if (outerV.done) return outerV;
+
+        k1 = outerV.value[0];
+        inner = outerV.value[1].entries();
+      }
+
+      // Ok, innerV should now contain [k2, v].
+      var k2 = innerV.value[0];
+      var v = innerV.value[1];
+
+      return {value:[k1, k2, v], done: false};
+    });
+  };
+
+  // Iterate through all keys pairwise
+  Map2.prototype.keys = function() {
+    var iter = this.entries();
+    return iterWithNext(function() {
+      var v = iter.next();
+      if (v.done) {
+        return v;
+      } else {
+        return {value:[v.value[0], v.value[1]], done:false};
+      }
+    });
+  };
+
+  // Iterate through all values
+  Map2.prototype.values = function() {
+    var iter = this.entries();
+    return iterWithNext(function() {
+      var v = iter.next();
+      if (v.done) {
+        return v;
+      } else {
+        return {value:v.value[2], done:false};
+      }
+    });
+  };
 }
-
-// Iterator to support for..of loops
-Map2.prototype[Symbol.iterator] = Map2.prototype.entries = function() {
-  var outer = this.map.entries();
-
-  var k1;
-  var inner = null;
-
-  return iterWithNext(function() {
-    var innerV;
-    while (inner == null || (innerV = inner.next()).done) {
-      // Go to the next outer map.
-      var outerV = outer.next();
-      // We need to return {done:true} - but this has the object we want.
-      if (outerV.done) return outerV;
-
-      k1 = outerV.value[0];
-      inner = outerV.value[1].entries();
-    }
-
-    // Ok, innerV should now contain [k2, v].
-    var k2 = innerV.value[0];
-    var v = innerV.value[1];
-
-    return {value:[k1, k2, v], done: false};
-  });
-};
-
-// Iterate through all keys pairwise
-Map2.prototype.keys = function() {
-  var iter = this.entries();
-  return iterWithNext(function() {
-    var v = iter.next();
-    if (v.done) {
-      return v;
-    } else {
-      return {value:[v.value[0], v.value[1]], done:false};
-    }
-  });
-};
-
-// Iterate through all values
-Map2.prototype.values = function() {
-  var iter = this.entries();
-  return iterWithNext(function() {
-    var v = iter.next();
-    if (v.done) {
-      return v;
-    } else {
-      return {value:v.value[2], done:false};
-    }
-  });
-};
 
 // Helper for node / iojs so you can see the map in the repl.
 Map2.prototype.inspect = function(depth, options) {
