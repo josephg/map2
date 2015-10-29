@@ -7,8 +7,8 @@ function Map2(data) {
   this.size = 0;
   if (data) {
     for (var i = 0; i < data.length; i++) {
-      var ref = data[i], k1 = ref[0], k2 = ref[1], v = ref[2];
-      this.set(k1, k2, v);
+      var d = data[i];
+      this.set(d[0], d[1], d[2]);
     }
   }
 }
