@@ -147,7 +147,7 @@ Map2.prototype.inspect = function(depth, options) {
     return '{[Map2]}';
   }
   var entries = [];
-  this.forEach(function(k1, k2, v) {
+  this.forEach(function(v, k1, k2) {
     entries.push("(" + (inspect(k1, options)) + "," + (inspect(k2, options)) + ") : " + (inspect(v, options)));
   });
   //assert(entries.length === this.size);
