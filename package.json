@@ -1,6 +1,6 @@
 {
   "name": "map2",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Map from (k1,k2) -> v",
   "main": "map2.js",
   "scripts": {
