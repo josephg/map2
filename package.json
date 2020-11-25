@@ -5,7 +5,9 @@
   "main": "map2.js",
   "types": "map2.d.ts",
   "scripts": {
-    "test": "mocha --compilers coffee:coffee-script/register --reporter spec test.coffee"
+    "test": "mocha --compilers coffee:coffee-script/register --reporter spec test.coffee",
+    "build": "tsc",
+    "prepare": "tsc"
   },
   "files": [
     "map2.ts",
