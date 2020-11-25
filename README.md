@@ -74,7 +74,7 @@ m.forEach(function(v, k1, v2) {
   console.log(k1, k2, v); // Prints 1,2,3 then {x:5},['an','array'] 
 });
 
-// Or use the new es6 iterators.
+// Or use iterator syntax.
 for (var entry of m) {
   console.log(entry); // An array of [k1, k2, v]
 }
@@ -248,6 +248,14 @@ Returns an iterator over key pairs in the map. Keys are returned in an array of 
 
 
 ---
+
+## Changelog
+
+#### 1.0.3
+
+- Converted code to typescript. Added typing information and ES module support. Tests are still in coffeescript but they work fine, so eh.
+- Made library always expose (and depend on) javascript iterators. They're supported everywhere, and have been for years at this point.
+- Rewrote inspect method to use newer [util.inspect.custom](https://nodejs.org/api/util.html#util_util_inspect_custom)
 
 ## License
 
