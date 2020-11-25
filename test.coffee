@@ -62,6 +62,12 @@ describe 'map2', ->
     assert.equal false, m.has(1, 2)
     assert.equal false, m.has(10, 10)
 
+  it 'works with deepEquals', ->
+    m = new Map2
+    m.set('a', 'b', 'c')
+    m.delete('a', 'b')
+    assert.deepStrictEqual(m, new Map2)
+
   it 'has size 0 after clear()', ->
     m = mapWithData()
     assert.strictEqual m.size, 6

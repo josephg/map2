@@ -1,4 +1,4 @@
-declare function require(name:string): any;
+declare function require(name:string): any
 
 export = Map2
 
@@ -56,22 +56,27 @@ class Map2<K1, K2, V> {
    * false otherwise.
    */
   delete(k1: K1, k2: K2): boolean {
-    const inner = this.map.get(k1);
+    const inner = this.map.get(k1)
     if (inner) {
       const deleted = inner.delete(k2);
       if (deleted) {
-        this.size--;
+        this.size--
+        if (inner.size === 0) {
+          // This is necessary to make assert.deepEquals work correctly.
+          // Also protects against memory leaks in some use cases.
+          this.map.delete(k1)
+        }
       }
-      return deleted;
+      return deleted
     } else {
-      return false;
+      return false
     }
   }
 
   /** Remove all items in the map */
   clear() {
-    this.map.clear();
-    this.size = 0;
+    this.map.clear()
+    this.size = 0
   }
 
   /**

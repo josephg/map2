@@ -251,6 +251,10 @@ Returns an iterator over key pairs in the map. Keys are returned in an array of 
 
 ## Changelog
 
+#### 1.1.2
+
+- Removed empty inner maps to fix `assert.deepEquals` comparison behaviour
+
 #### 1.1.1
 
 - Added the ability to initalize a map from an iterator (or another map).
