@@ -251,7 +251,7 @@ Returns an iterator over key pairs in the map. Keys are returned in an array of 
 
 ## Changelog
 
-#### 1.0.3
+#### 1.1.0
 
 - Converted code to typescript. Added typing information and ES module support. Tests are still in coffeescript but they work fine, so eh.
 - Made library always expose (and depend on) javascript iterators. They're supported everywhere, and have been for years at this point.
