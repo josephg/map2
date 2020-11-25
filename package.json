@@ -5,7 +5,7 @@
   "main": "map2.js",
   "types": "map2.d.ts",
   "scripts": {
-    "test": "mocha --require coffee-script/register --reporter spec test.coffee",
+    "test": "mocha --require coffeescript/register --reporter spec test.coffee",
     "build": "tsc",
     "prepare": "tsc"
   },
@@ -30,7 +30,7 @@
   },
   "homepage": "https://github.com/josephg/map2",
   "devDependencies": {
-    "coffee-script": "^1.9.2",
+    "coffeescript": "^2.5.1",
     "mocha": "^8.2.1",
     "typescript": "^4.1.2"
   }
