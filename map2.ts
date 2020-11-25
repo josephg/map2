@@ -11,14 +11,15 @@ class Map2<K1, K2, V> {
   /**
    * Create a new Map2. The constructor takes in an iterable of data values in
    * the form of [[k1, k2, v], [k1, k2, v], ...].
+   * 
+   * Eg: `new Map2([['a', 'b', true], ['c', 'd', false]])`
    */
-  constructor(data?: [K1, K2, V][]) {
+  constructor(data?: Iterable<[K1, K2, V]>) {
     this.map = new Map
     this.size = 0
     if (data) {
-      for (let i = 0; i < data.length; i++) {
-        const d = data[i]
-        this.set(d[0], d[1], d[2])
+      for (const [k1, k2, v] of data) {
+        this.set(k1, k2, v)
       }
     }  
   }

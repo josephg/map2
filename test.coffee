@@ -18,6 +18,18 @@ describe 'map2', ->
     assert.equal m, m.set 1, 2, 3
     assert.equal 3, m.get 1, 2
 
+  it 'can initialize a map with data', ->
+    m = new Map2 [[1,2,true], [3,4,false]]
+    assert.strictEqual m.size, 2
+    assert.strictEqual m.get(1,2), true
+    assert.strictEqual m.get(3,4), false
+  
+  it 'can initalize a map from an iterator', ->
+    m = mapWithData()
+    m2 = new Map2 m
+    assert.strictEqual m.size, m2.size
+    assert.deepStrictEqual Array.from(m), Array.from(m2)
+
   it 'updates the size correctly when items are set', ->
     m = new Map2
     assert.strictEqual m.size, 0
